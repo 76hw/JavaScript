@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form validation</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            text-align: center;
+        }
+        body{
+            margin: 100px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .box{
+            width: 400px;
+            height: 450px;
+            dsiplay:flex;
+            justify-content: center;
+            align-content: space-between;
+            border-radius: 10px;
+            box-shadow:#888 2px 2px 20px 2px;
+            padding:0 40px;
+        }
+        .header1{
+            display:flex;
+            justify-content: center;
+            font-size: 32px;
+            margin: 20px;
+            align-content: space-between;
+            line-height: 120px;
+        }
+        h1{
+            color:#0e8bff;
+        }
+
+        #account,#password{
+            box-sizing:border-box;
+            font-size: 14px;
+            height: 30px;
+            width: 300px;
+            border-radius: 4px;
+            border:1px solid #bbb;
+            color:#999;
+            box-shadow: 1px 0 1px #ccc inset;
+            text-align: left;
+            outline: none;
+            padding: 0 10px;
+            margin:10px;
+        }
+        .button{
+            text-align: center;
+        }
+        #button{
+            width:200px;
+            height:35px;
+            border-radius: 4px;
+            color: #fff;
+            background-color: rgba(0, 132, 255, 0.85);
+            outline:none;
+            border:none;
+            cursor: pointer;
+            margin:80px 0px 0px 5px;
+            text-align: center;
+        }
+        input.button:active{
+            background-color: rgba(0, 131, 254, 0.88);
+        }
+    </style>
+    <style>
+        .right{
+            color: #98ff3c !important;
+        }
+        .error{
+            color: #ff4846 !important;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <form action="">
+        <div class="header1">
+            <h1>注册</h1>
+        </div>
+        <div>
+            <div>
+                <div class="account">
+                    <input type="text" name="e-mail" placeholder="用户名" id="account"  autocomplete="off">
+                </div>
+                <div class="password">
+                    <input type="password" name="password" placeholder="密码" id="password" autocomplete="off">
+                </div>
+                <div class="button">
+                    <input type="submit" value="注册" id="button">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    window.onload = function(){
+        $('button').onclick = function(){
+            var password = $('password').value;
+            var letter = /[a-zA-Z]+$/;
+            var number = /[0-9]+$/;
+            var abc = /[A-Za-z].*[0-9]|[0-9].*[A-Za-z]$/;/*?????*/
+            var flag_letter = letter.test(password);
+            var flag_number = number.test(password);
+            var flag_abc = abc.test(password);
+            if($('account').value.length>7){
+                alert('用户名长度应小于8');
+            }
+            if(flag_abc === true){
+                return;
+            }
+            else if(flag_letter === false && flag_number === true){
+                alert('此密码没有包含字母');
+            }else if(flag_number === false && flag_letter === true){
+                alert('此密码没有包含数字');
+            }else if(flag_number === false && flag_letter === false){
+                alert('此密码没有包含数字也没有字母');
+            }
+        }
+    }
+    function $(id) {
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>comments</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box{
+            width: 800px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+        #my_textarea{
+            width: 80%;
+            height: 120px;
+            resize:none;
+        }
+        .box-top{
+            margin-bottom: 20px;
+        }
+        #btn{
+            width:40px;
+            height:30px;
+            border-radius: 4px;
+            color: #ffffff;
+            background-color: #4a7dbb;
+            outline:none;
+            border:none;
+            cursor: pointer;
+            margin:10px 0px 0px 5px;
+        }
+        #ul{
+            margin: 0 80px;
+
+        }
+        #ul li{
+            border-bottom:1px dashed #ccc;
+            color:red;
+            line-height: 44px;
+
+        }
+        #ul li a{
+            float:right;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div class="box-top">
+            <label>发表评论：</label>
+            <textarea id="my_textarea" cols="60" rows="10"></textarea>
+            <button id="btn">发表</button>
+            <div>
+                <ul id="ul">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+    window.onload = function(){
+        //监听按钮点击
+        $('btn').onclick = function(){
+            //获取输入内容
+            var content = $('my_textarea').value;
+            //判断
+            if(content.length === 0){
+                alert("评论为空");
+                return ;
+            }
+            //创建li标签放入ul
+            var li = document.createElement("li");
+            li.innerHTML = content + '<a href="javascript:;">删除</a>';
+            //倒序显示
+            $('ul').insertBefore(li,$('ul').children[0]);
+            //$('ul').appendChild(li);
+            //清除输入框的内容
+            $('my_textarea').value = '';
+            //删评论
+            var as = $('ul').getElementsByTagName('a');
+            for(var i = 0; i<as.length; i++){
+                var a = as[i];
+                a.onclick = function(){
+                    this.parentNode.remove();
+                }
+            }
+        }
+    }
+    function $(id) {
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+</body>
+</html>

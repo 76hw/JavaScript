@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>callback function</title>
+</head>
+<body>
+<script>
+    /*定义一个对象数组。每个对象包含姓名和性别两个属性，用for循环进行遍历，打印出所有性别为男的人的信息
+    */
+    // var sdt = [
+    //     {name:"小A",sex:"M"},
+    //     {name:"小B",sex:"F"},
+    //     {name:"小C",sex:"F"},
+    //     {name:"小D",sex:"M"}
+    // ];
+    //
+    // for(var value of sdt){
+    //     if(value.sex === "M")
+    //         console.log(value);
+    // }
+/*以回调函数的方式实现*/
+    //QAQ感觉不是很懂回调函数
+
+    var sdts = [
+        {name:"小A",sex:"M"},
+        {name:"小B",sex:"F"},
+        {name:"小C",sex:"F"},
+        {name:"小D",sex:"M"}
+    ];
+    sdts.forEach(function(item,index){
+        for(var i = 0,len = sdts.length; i<len;i++){
+            if(this.index === "F")return;
+            else console.log(this.item);
+        }
+    });
+
+</script>
+</body>
+</html>

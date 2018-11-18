@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>photo wall</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        html, body, ul {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        img{
+            height:300px;
+            vertical-align:top;
+            display:block ;
+        }
+        #ps li {
+            box-shadow: 0 0 10px #000;
+            position: absolute;
+            transition:1s;
+        }
+        #ps li.current{
+            left: 50% !important;
+            top: 50% !important;
+            transform: rotate(0deg) translate(-50%, -50%) scale(1.5, 1.5) !important;
+            z-index: 99;
+            transition: 1.5s;
+        }
+    </style>
+</head>
+<body>
+<ul id="ps"></ul>
+<script src="js/underscore.js"></script>
+<script>
+    window.onload = function () {
+        //获取需要的标签
+        var ps = document.getElementById("ps");
+        //动态创建li标签
+        for(var i = 0; i < 9; i++){
+            //创建li标签
+            var li = document.createElement("li");
+            ps.appendChild(li);
+
+            //创建img
+            var img = document.createElement("img");
+            img.src = "imgs/"+(i + 1)+".jpg";
+            li.appendChild(img);
+
+            //获取所有li标签
+            var allLis = ps.children;
+            //求出可视区的宽高
+            var screenW = document.documentElement.clientWidth - 310;
+            var screenH = document.documentElement.clientHeight - 310;
+
+            //遍历
+            for(var j = 0; j <allLis.length; j ++){
+                li = allLis[j];
+
+                li.style.left = _.random(0, screenW) + "px";
+                li.style.top = _.random(0, screenH) + "px";
+                li.style.transform = "rotate("+_.random(0, 360)+"deg)";
+
+                li.onclick = function () {
+                    for(var i = 0; i < allLis.length; i ++){
+                        allLis[i].className = "";
+                    }
+                    this.className = "current";
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>
